@@ -65,7 +65,16 @@ function changeColour(el)
 function submitCal()
 {
 	var params = $('#calendar_form').serializeArray();
-	$.post(page_self, params, function(data) {}, 'text');
+	var colors_str = colors[0] + ':' + color_codes[0];
+	for( i in colors )
+	{
+		if( i != 0 )
+		{
+		colors_str = colors_str + '|' + colors[i] + ':' + color_codes[i];
+		}
+	}
+	
+	$.post(page_self+'?colors='+colors_str, params, function(data) {}, 'text');
 }
 
 function showModifier()

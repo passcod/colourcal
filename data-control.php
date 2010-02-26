@@ -27,7 +27,16 @@ elseif($_GET['data'] == 'blockui')
 }
 elseif(!empty($_POST['day_0_1']))
 {
-	$written = file_put_contents( 'calendar.dat', serialize($_POST) );
+	$dat = $_POST;
+	$dat["colors"] = array();
+	$cc = explode('|', $_GET['colors']);
+	foreach ( $cc as $ccc )
+	{
+		$c4 = explode(':', $ccc);
+		$dat["colors"][] = array($c4[0], $c4[1]);
+	}
+	
+	$written = file_put_contents( 'calendar.dat', serialize($dat) );
 	echo $written;
 	exit();
 }

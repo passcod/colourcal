@@ -13,7 +13,7 @@
 
 
 <?php foreach ( $c['colors'] as $key => $color ) { ?>
-.<?php echo $color[0]; ?> { background: <?php echo $color[1]; ?>; }
+.<?php echo $color[0]; ?> { background: #<?php echo $color[1]; ?>; }
 <?php } ?>
 
 .cr { font-weight: bold; }
@@ -27,6 +27,11 @@ var page_self = "<?php echo $_SERVER['PHP_SELF']; ?>";
 var colors = Array();
 <?php foreach ( $c['colors'] as $k => $col ) { ?>
 colors[<?php echo $k; ?>] = "<?php echo $col[0]; ?>";
+<?php } ?>
+
+var color_codes = Array();
+<?php foreach ( $c['colors'] as $k => $col ) { ?>
+color_codes[<?php echo $k; ?>] = "<?php echo $col[1]; ?>";
 <?php } ?>
 
 $(function() {
