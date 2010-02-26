@@ -19,6 +19,12 @@ elseif($_GET['data'] == 'md5')
 	echo $md5;
 	exit();
 }
+elseif($_GET['data'] == 'blockui')
+{
+	header('Content-type: text/javascript');
+	echo $BlockUI;
+	exit();
+}
 elseif(!empty($_POST['day_0_1']))
 {
 	$written = file_put_contents( 'calendar.dat', serialize($_POST) );

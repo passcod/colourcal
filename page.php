@@ -10,9 +10,11 @@
 .cd2 th,.cd2 td.cmi,.cd2 td.cbo{border-width:1px}.cd3 th,.cd3 td.cmi,.cd3 td.cbo{border-width:2px}.cd4 th,.cd4 td.cmi,.cd4 td.cbo{border-width:3px}.cd5 th,.cd5 td.cmi,.cd5 td.cbo{border-width:4px}.cg6 th,.cg6 td.cmi,.cg6 td.cbo{border-color:#8FBC8F}.cg7 th,.cg7 td.cmi,.cg7 td.cbo{border-color:olive}.cg8 th,.cg8 td.cmi,.cg8 td.cbo{border-color:#4169E1}.cg9 th,.cg9 td.cmi,.cg9 td.cbo{border-color:navy}.cg10 th,.cg10 td.cmi,.cg10 td.cbo{border-color:purple}.cg11 th,.cg11 td.cmi,.cg11 td.cbo{border-color:#C71585}.cg12 th,.cg12 td.cmi,.cg12 td.cbo{border-color:#4B0082}.cg13 th,.cg13 td.cmi,.cg13 td.cbo{border-color:#CD5C5C}.cg14 th,.cg14 td.cmi,.cg14 td.cbo{border-color:#40E0D0}.cg15 th,.cg15 td.cmi,.cg15 td.cbo{border-color:#556B2F}.cg16 th,.cg16 td.cmi,.cg16 td.cbo{border-color:#A52A2A}.cg17 th,.cg17 td.cmi,.cg17 td.cbo{border-color:#FFd700}.ci4 .ca3 .cv{border-left-style:solid;border-right-style:solid}.ci6 .ca td{border-right-style:solid;border-bottom-style:solid}.ci7 .ca td{border-left-style:none;border-right-style:solid;border-bottom-style:solid}.ci8 table.ca{border-collapse:collapse}.ci9 table.ca{border-collapse:separate;border-spacing:expression(cellSpacing=2)}.ci10 table.ca{border-collapse:separate;border-spacing:expression(cellSpacing=3)}.ci11 table.ca{border-collapse:separate;border-spacing:expression(cellSpacing=4)}.cu6 .ca td,.cu6 .cbp div{border-color:#fff}.cu7 .ca td,.cu7 .cbp div{border-color:#789}.cu8 .ca td,.cu8 .cbp div{border-color:#8B4513}.cu9 .ca td,.cu9 .cbp div{border-color:#5F9EA0}.cu10 .ca td,.cu10 .cbp div{border-color:#A9A9A9}.cu11 .ca td,.cu11 .cbp div{border-color:#BC8F8F}.cu12 .ca td,.cu12 .cbp div{border-color:#A0522D}.cu13 .ca td,.cu13 .cbp div{border-color:#008B8B}.cu14 .ca td,.cu14 .cbp div{border-color:#6B8E23}.cu15 .ca td,.cu15 .cbp div{border-color:#3CB371}.cj1 .ca td,.cj1 .cbp div{border-width:.02em}.cj2 .ca td,.cj2 .cbp div{border-width:.1em}.cj3 .ca td,.cj3 .cbp div{border-width:.2em}.cj4 .ca td,.cj4 .cbp div{border-width:.3em}.cj5 .ca td,.cj5 .cbp div{border-width:.4em}.cj6 .ca td,.cj6 .cbp div{border-width:.5em}.cd1 th,.cd1 td.cmi,.cd1 td.cbo,.ci1 .cl td,.ci1 .cw,.ci1 .cbp div,.ci1 .ca2 td,.ci2 .ca2 td,.ci3 .ca2 td,.ci4 .ca2 td,.ci5 .ca2 td{border-style:none}.cg1 th,.cg1 td.cmi,.cg1 td.cbo,.cu1 .ca td,.cu1 .cbp div{border-color:#000}.cg2 th,.cg2 td.cmi,.cg2 td.cbo,.cu2 .ca td,.cu2 .cbp div{border-color:#333}.cg3 th,.cg3 td.cmi,.cg3 td.cbo,.cu3 .ca td,.cu3 .cbp div{border-color:#666}.cg4 th,.cg4 td.cmi,.cg4 td.cbo,.cu4 .ca td,.cu4 .cbp div{border-color:#999}.cg5 th,.cg5 td.cmi,.cg5 td.cbo,.cu5 .ca td,.cu5 .cbp div{border-color:#ccc}.ci2 tr.cl td,.ci5 .cl td,.ci5 .ca3 .cv,.ci5 .ca3 .cn{border-bottom-style:solid}.ci2 .cbp div,.ci2 table.ca3,.ci3 table.ca3,.ci4 .cbp div,.ci4 table.ca3,.ci5 .cbp div,.ci5 table.ca3,.ci7 .cl td,.ci7 .cbp div{border-top-style:solid}.ci3 tr.cl td,.ci4 tr.cl td{border-bottom-style:solid;border-top-style:solid}.ci5 .cw,.ci5 .ca3 .cv{border-right-style:solid}.ci6 tr.cb td,.ci7 .ca tr.cb td{border-bottom-style:none}.ci6 td.cr,.ci7 .ca td.cr{border-right-style:none}.ci6 .ca3 td,.ci7 .ca3 td,.ci8 .ca3 td{border-style:solid none none}.ci8 .ca1 td,.ci8 .ca2 td,.ci9 table.ca td,.ci10 table.ca td,.ci11 table.ca td{border-style:solid}
 
 .brown { background: #B59C63; }
-.red { background: #C33724; }
-.yellow { background: #F0AA31; }
-.green { background: #293828; }
+
+
+<?php foreach ( $c['colors'] as $key => $color ) { ?>
+.<?php echo $color[0]; ?> { background: <?php echo $color[1]; ?>; }
+<?php } ?>
 
 .cr { font-weight: bold; }
 .cl { font-weight: bold; font-size: larger; }
@@ -23,9 +25,9 @@
 var page_self = "<?php echo $_SERVER['PHP_SELF']; ?>";
 
 var colors = Array();
-colors[0] = "red";
-colors[1] = "yellow";
-colors[2] = "green";
+<?php foreach ( $c['colors'] as $k => $col ) { ?>
+colors[<?php echo $k; ?>] = "<?php echo $col[0]; ?>";
+<?php } ?>
 
 $(function() {
 	$('#layout-center').append("<a onclick=\"loadEdit(); $(this).html(''); $(this).attr('onclick', '');\" style=\"color: #283939; font-size: x-small\">edit</a>");

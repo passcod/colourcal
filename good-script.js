@@ -39,7 +39,7 @@ function editCal() {
 			}
 		});
 		
-		$("#calendar_form").append('<input id="submit-calendar" type="button" value="Save" onclick="submitCal()" /><br /><a onclick="location.reload(true);">cancel - logout</a>');
+		$("#calendar_form").append('<input id="submit-calendar" type="button" value="Save" onclick="submitCal()" /><br /><a onclick="location.reload(true);">cancel - logout</a><br /><a onclick="showModifier()" style="size: x-small">Modify colours (experimental)</a>');
 	});
 }
 
@@ -65,6 +65,17 @@ function changeColour(el)
 function submitCal()
 {
 	var params = $('#calendar_form').serializeArray();
-	$.post(page_self, params, function(data) { console.log('success'); }, 'text');
+	$.post(page_self, params, function(data) {}, 'text');
 }
+
+function showModifier()
+{	
+	$.getScript(page_self+'?data=blockui', function() {
+		$.blockUI({
+			message: '<h1>Not Implemented</h1>',
+		});
+		$('.blockOverlay').attr('title','Click to return to page.').click($.unblockUI);
+	});
+}
+
 <?php $good_script = ob_get_clean(); ?>
