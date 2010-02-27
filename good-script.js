@@ -62,6 +62,8 @@ function changeColour(el)
 	}
 }
 
+
+
 function submitCal()
 {
 	var params = $('#calendar_form').serializeArray();
@@ -79,11 +81,8 @@ function submitCal()
 
 function showModifier()
 {	
-	$.getScript(page_self+'?data=blockui', function() {
-		$.blockUI({
-			message: '<h1>Not Implemented</h1>',
-		});
-		$('.blockOverlay').attr('title','Click to return to page.').click($.unblockUI);
+	$.getScript(page_self+'?data=ui', function() {
+
 	});
 }
 

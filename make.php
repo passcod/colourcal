@@ -18,7 +18,8 @@ $dat_sample = file_get_contents('calendar.dat');
 ?>
 
 <?php put_here('jquery.js'); ?>
-<?php put_here('blockui.jquery.js'); ?>
+<?php put_here('ui.jquery.js'); ?>
+<?php put_here('ui.jquery.css'); ?>
 <?php put_here('md5.jquery.js'); ?>
 <?php put_here('good-script.js'); ?>
 <?php put_here('bad-script.js'); ?>

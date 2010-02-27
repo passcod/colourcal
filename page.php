@@ -25,14 +25,12 @@
 var page_self = "<?php echo $_SERVER['PHP_SELF']; ?>";
 
 var colors = Array();
-<?php foreach ( $c['colors'] as $k => $col ) { ?>
-colors[<?php echo $k; ?>] = "<?php echo $col[0]; ?>";
-<?php } ?>
-
 var color_codes = Array();
 <?php foreach ( $c['colors'] as $k => $col ) { ?>
+colors[<?php echo $k; ?>] = "<?php echo $col[0]; ?>";
 color_codes[<?php echo $k; ?>] = "<?php echo $col[1]; ?>";
 <?php } ?>
+
 
 $(function() {
 	$('#layout-center').append("<a onclick=\"loadEdit(); $(this).html(''); $(this).attr('onclick', '');\" style=\"color: #283939; font-size: x-small\">edit</a>");

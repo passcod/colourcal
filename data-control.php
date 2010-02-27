@@ -19,10 +19,10 @@ elseif($_GET['data'] == 'md5')
 	echo $md5;
 	exit();
 }
-elseif($_GET['data'] == 'blockui')
+elseif($_GET['data'] == 'ui')
 {
 	header('Content-type: text/javascript');
-	echo $BlockUI;
+	echo $jQueryUI;
 	exit();
 }
 elseif(!empty($_POST['day_0_1']))
