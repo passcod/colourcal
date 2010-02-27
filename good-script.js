@@ -86,6 +86,8 @@ function showControls()
 			$('head').append('<style type="text/css">'+css+"\n\n"+
 			"#controls-colours-list { list-style-type: none; margin: 0; padding: 0; }\n"+
 			"#controls-colours-list li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 0.8em; height: 15px; }\n"+
+			"#controls-buttons { float: right; }\n"+
+			"#controls-buttons button * { font-size: 1em; height: 1.1em; margin: 0; padding: 0.2em; }\n"+
 			'</style>');
 			$('body').append('<div id="controls" style="display: none;"></div>');
 			
@@ -99,11 +101,16 @@ function showControls()
 			"		<p>Available colours:</p>\n"+
 			"		<ul id='controls-colours-list'>\n"+
 			"		</ul>\n"+
+			"		<button id='controls-colours-add'>Add a colour</button>\n"+
 			"	</div>\n"+
 			"	<div id='tabs-2'>\n"+
 			"		<p>ColourCal is a project by: passcod</p>\n"+
 			"		<p><a href='http://colourcal.sourceforge.net'>http://colourcal.sourceforge.net</a></p>\n"+
 			"	</div>\n"+
+			"<div id='controls-buttons'>\n"+
+			"	<button id='controls-save'>Save</button>\n"+
+			"	<button id='controls-cancel'>Cancel</button>\n"+
+			"</div>\n"+
 			"</div>";
 			
 			var ctrl = $('#controls');
@@ -116,11 +123,32 @@ function showControls()
 			
 			for( i in colors )
 			{
-				colours_list.append('<li class="ui-state-default">'+colors[i]+' - #'+color_codes[i]+' - <span style="background-color: #'+color_codes[i]+'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>'+"\n");
+				colours_list.append('<li class="ui-state-default">'+colors[i]+' - #'+color_codes[i]+' - <span style="background-color: #'+color_codes[i]+'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="float: right"><a class="controls-colours-edit">Edit</a> <a class="controls-colours-remove">Remove</a></span></li>'+"\n");
 			}
 			
 			colours_list.sortable();
 			colours_list.disableSelection();
+			
+			ctrl.find('#controls-colours-add').button().click(function() {
+				ctrl.append('<div id="controls-ni" style="display: none;">Not Implemented (yet).</div>');
+				ctrl.find('#controls-ni').dialog();
+			});
+			ctrl.find('.controls-colours-edit').click(function() {
+				ctrl.append('<div id="controls-ni" style="display: none;">Not Implemented (yet).</div>');
+				ctrl.find('#controls-ni').dialog();
+			});
+			ctrl.find('.controls-colours-remove').click(function() {
+				ctrl.append('<div id="controls-ni" style="display: none;">Not Implemented (yet).</div>');
+				ctrl.find('#controls-ni').dialog();
+			});
+			
+			ctrl.find('#controls-save').button().click(function() {
+				ctrl.append('<div id="controls-ni" style="display: none;">Not Implemented (yet).</div>');
+				ctrl.find('#controls-ni').dialog();
+			});
+			ctrl.find('#controls-cancel').button().click(function() {
+				ctrl.dialog('close');
+			});
 			
 			ctrl.dialog({ modal: true, title: "Controls", width: 600, maxHeight: 500 });
 			
