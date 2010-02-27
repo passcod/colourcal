@@ -39,6 +39,7 @@ $(function() {
 function loadEdit()
 {
 	$('#layout-center').append('<div id="login_form"><p>Enter password:</p><input type="password" name="pass" class="pass" /><br /><input type="button" value="Continue" onclick="loginCal()" /></div>');
+	$('.pass').focus();
 }
 
 function loginCal()
