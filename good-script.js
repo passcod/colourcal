@@ -39,7 +39,7 @@ function editCal() {
 			}
 		});
 		
-		$("#calendar_form").append('<input id="submit-calendar" type="button" value="Save" onclick="submitCal()" /><br /><a onclick="location.reload(true);">cancel - logout</a><br /><a onclick="showModifier()" style="size: x-small">Modify colours (experimental)</a>');
+		$("#calendar_form").append('<input id="submit-calendar" type="button" value="Save" onclick="submitCal()" /><br /><a onclick="location.reload(true);">cancel - logout</a><br /><a onclick="showControls()" style="size: x-small">Control (experimental)</a>');
 	});
 }
 
@@ -79,10 +79,52 @@ function submitCal()
 	$.post(page_self+'?colors='+colors_str, params, function(data) {}, 'text');
 }
 
-function showModifier()
+function showControls()
 {	
-	$.getScript(page_self+'?data=ui', function() {
-
+	$.getScript(page_self+'?data=uijs', function() {
+		$.get(page_self+'?data=uicss', function(css) {
+			$('head').append('<style type="text/css">'+css+"\n\n"+
+			"#controls-colours-list { list-style-type: none; margin: 0; padding: 0; }\n"+
+			"#controls-colours-list li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 0.8em; height: 15px; }\n"+
+			'</style>');
+			$('body').append('<div id="controls" style="display: none;"></div>');
+			
+			var tabs_str = ""+
+			"<div id='tabs'>\n"+
+			"	<ul>\n"+
+			"		<li><a href='#tabs-1'>Colours</a></li>\n"+
+			"		<li><a href='#tabs-2'>About</a></li>\n"+
+			"	</ul>\n"+
+			"	<div id='tabs-1'>\n"+
+			"		<p>Available colours:</p>\n"+
+			"		<ul id='controls-colours-list'>\n"+
+			"		</ul>\n"+
+			"	</div>\n"+
+			"	<div id='tabs-2'>\n"+
+			"		<p>ColourCal is a project by: passcod</p>\n"+
+			"		<p><a href='http://colourcal.sourceforge.net'>http://colourcal.sourceforge.net</a></p>\n"+
+			"	</div>\n"+
+			"</div>";
+			
+			var ctrl = $('#controls');
+			ctrl.html(tabs_str);
+			
+			var tabs = ctrl.find('#tabs');
+			tabs.tabs();
+			
+			var colours_list = ctrl.find('#controls-colours-list');
+			
+			for( i in colors )
+			{
+				colours_list.append('<li class="ui-state-default">'+colors[i]+' - #'+color_codes[i]+' - <span style="background-color: #'+color_codes[i]+'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></li>'+"\n");
+			}
+			
+			colours_list.sortable();
+			colours_list.disableSelection();
+			
+			ctrl.dialog({ modal: true, title: "Controls", width: 600, maxHeight: 500 });
+			
+		});
 	});
 }
 
