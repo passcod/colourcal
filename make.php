@@ -15,7 +15,14 @@ function put_here($filename)
 
 $dat_sample = file_get_contents('calendar.dat');
 
+echo "<"."?"."php";
 ?>
+
+/**
+ * @licence GNU GPL see LICENSE file
+ */
+
+<?php echo "?".">"; ?>
 
 <?php put_here('jquery.js'); ?>
 <?php put_here('ui.jquery.js'); ?>
