@@ -15,7 +15,7 @@ if($_GET['data'] == 'script')
 }
 elseif($_GET['data'] == 'md5')
 {
-	header('Content-type: text/javascript');
+	//header('Content-type: text/javascript');
 	echo $md5;
 	exit();
 }
@@ -47,5 +47,4 @@ elseif(!empty($_POST['day_0_1']))
 	exit();
 }
 $c = unserialize(file_get_contents('calendar.dat'));
-
 ?>
