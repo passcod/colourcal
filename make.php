@@ -45,5 +45,5 @@ ob_start();
 <?php put_here('data-control.php'); ?>
 <?php put_here('page.php'); ?>
 <?php echo "\n<"."?"."php\n\n"; ?>
-ob_end_flush():
+ob_end_flush();
 <?php echo "\n\n?".">"; ?>
