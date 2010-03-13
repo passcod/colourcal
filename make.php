@@ -1,8 +1,7 @@
 <?php
 
 /** Makefile for ColourCal.
- * Run this file to build the one-file (two, actually,
- * but one's for the data) app. (for distro).
+ * Run this file to build the app.
  */
 
 header('Content-type: text/plain');
@@ -30,8 +29,8 @@ echo "<"."?"."php\n\n";
  * @version <?php echo $version; ?>
  */
 
-$version_short = '0.2';
-$version = '1-'.$version_short.'-'.date('y.W.N-H.i.s');
+$version_short = '<?php echo $version_short; ?>';
+$version = '<?php echo $version; ?>');
 ob_start();
 
 <?php echo "\n\n?".">"; ?>
