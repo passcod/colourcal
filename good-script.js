@@ -23,6 +23,7 @@ function editCal() {
 		else if ( ele.hasClass("month1") ) { return "1"; }
 		else if ( ele.hasClass("month2") ) { return "2"; }
 		else { return false; }
+		//todo: implement for more months
 	}
 	
 	
@@ -92,7 +93,8 @@ function showControls()
 		"	<ul>\n"+
 		"		<li><a href='#tabs-1'>Colours</a></li>\n"+
 		"		<li><a href='#tabs-2'>Users</a></li>\n"+
-		"		<li><a href='#tabs-3'>About</a></li>\n"+
+		"		<li><a href='#tabs-3'>Months</a></li>\n"+
+		"		<li><a href='#tabs-4'>About</a></li>\n"+
 		"	</ul>\n"+
 		"	<div id='tabs-1'>\n"+
 		"		<p>Available colours:</p>\n"+
@@ -105,6 +107,10 @@ function showControls()
 		"		<p>Feature Coming Soon</p>\n"+
 		"	</div>\n"+
 		"	<div id='tabs-3'>\n"+
+		"		<p>This is not implemented yet</p>\n"+
+		"		<p>Feature Coming Soon</p>\n"+
+		"	</div>\n"+
+		"	<div id='tabs-4'>\n"+
 		"		<p>ColourCal is a project by: passcod</p>\n"+
 		"		<p><a href='http://colourcal.sourceforge.net'>http://colourcal.sourceforge.net</a></p>\n"+
 		"	</div>\n"+
@@ -113,6 +119,8 @@ function showControls()
 		"	<button id='controls-cancel'>Cancel</button>\n"+
 		"</div>\n"+
 		"</div>";
+		//todo: implement users + months capabilities
+		
 		
 		var ctrl = $('#controls');
 		ctrl.html(tabs_str);
@@ -141,6 +149,7 @@ function showControls()
 		
 		ctrl.dialog({ modal: true, title: "Controls", width: 600, maxHeight: 500 });
 		
+		//todo: implement those funcs.
 		var coloursAdd = function() {
 			//
 		};
