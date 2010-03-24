@@ -29,8 +29,14 @@ elseif($_GET['data'] == 'uijs')
 }
 elseif($_GET['data'] == 'uicss')
 {
-	header('Content-type: text/javascript');
+	header('Content-type: text/css');
 	echo $jQueryUI_css;
+	exit();
+}
+elseif($_GET['data'] == 'colorpickerjs')
+{
+	header('Content-type: text/javascript');
+	echo $ColorPicker_js;
 	exit();
 }
 elseif(!empty($_POST['day_0_1']))

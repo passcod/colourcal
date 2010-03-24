@@ -1,6 +1,6 @@
 <?php ob_start(); ?>
 function editCal() {
-
+	loadLibs();
 	$('body').append('<span id="colourcal-data-store" style="width: 0px; height: 0px; display: none; visibility: hidden;"></span>');
 
 	function getColor(ele)
@@ -17,13 +17,14 @@ function editCal() {
 	
 	function getMonth(ele)
 	{
-		ele = $(ele);
-		
-		if ( ele.hasClass("month0") ) { return "0"; }
-		else if ( ele.hasClass("month1") ) { return "1"; }
-		else if ( ele.hasClass("month2") ) { return "2"; }
-		else { return false; }
-		//todo: implement for more months
+		for ( i=0; i<12; i++ )
+		{
+			if ( $(ele).hasClass("month"+i) )
+			{
+				return ''+i;
+			}
+		}
+		return false;
 	}
 	
 	
@@ -85,109 +86,125 @@ function submitCal()
 
 function showControls()
 {	
-	var showControlsPopup = function() {
-		$('body').append('<div id="controls" style="display: none;"></div>');
+	$('head').append('<style type="text/css">'+
+	"#controls-colours-list { list-style-type: none; margin: 0; padding: 0; }\n"+
+	"#controls-colours-list li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 0.8em; height: 15px; }\n"+
+	"#controls-buttons { float: right; }\n"+
+	"#controls-buttons button * { font-size: 1em; height: 1.1em; margin: 0; padding: 0.2em; }\n"+
+	'</style>');
+	
+	$('body').append('<div id="controls" style="display: none;"></div>');
+	
+	var tabs_str = ""+
+	"<div id='tabs'>\n"+
+	"	<ul>\n"+
+	"		<li><a href='#tabs-1'>Colours</a></li>\n"+
+	"		<li><a href='#tabs-2'>Users</a></li>\n"+
+	"		<li><a href='#tabs-3'>Months</a></li>\n"+
+	"		<li><a href='#tabs-4'>About</a></li>\n"+
+	"	</ul>\n"+
+	"	<div id='tabs-1'>\n"+
+	"		<p>Available colours:</p>\n"+
+	"		<ul id='controls-colours-list'>\n"+
+	"		</ul>\n"+
+	"		<button id='controls-colours-add'>Add a colour</button>\n"+
+	"	</div>\n"+
+	"	<div id='tabs-2'>\n"+
+	"		<p>This is not implemented yet</p>\n"+
+	"		<p>Feature Coming Soon</p>\n"+
+	"	</div>\n"+
+	"	<div id='tabs-3'>\n"+
+	"		<p>This is not implemented yet</p>\n"+
+	"		<p>Feature Coming Soon</p>\n"+
+	"	</div>\n"+
+	"	<div id='tabs-4'>\n"+
+	"		<p>ColourCal is a project by: passcod</p>\n"+
+	"		<p><a href='http://colourcal.sourceforge.net'>http://colourcal.sourceforge.net</a></p>\n"+
+	"	</div>\n"+
+	"<div id='controls-buttons'>\n"+
+	"	<button id='controls-save'>Save</button>\n"+
+	"	<button id='controls-cancel'>Cancel</button>\n"+
+	"</div>\n"+
+	"</div>";
+	//todo: implement users + months capabilities
+	
+	
+	var ctrl = $('#controls');
+	ctrl.html(tabs_str);
+	
+	var tabs = ctrl.find('#tabs');
+	tabs.tabs();
+	
+	var colours_list = ctrl.find('#controls-colours-list');
+	
+	for( i in colors )
+	{
+		colours_list.append('<li class="ui-state-default">'+colors[i]+' - #'+color_codes[i]+' - <span style="background-color: #'+color_codes[i]+'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="float: right"><a class="controls-colours-edit">Edit</a> <a class="controls-colours-remove">Remove</a></span></li>'+"\n");
+	}
+	
+	colours_list.sortable();
+	colours_list.disableSelection();
+	
+	ctrl.find('#controls-colours-add').button().click(coloursAdd);
+	ctrl.find('.controls-colours-edit').click(coloursEdit);
+	ctrl.find('.controls-colours-remove').click(coloursRemove);
+	
+	ctrl.find('#controls-save').button().click(coloursSave);
+	ctrl.find('#controls-cancel').button().click(function() {
+		ctrl.dialog('close');
+	});
+	
+	ctrl.dialog({ modal: true, title: "Controls", width: 600, maxHeight: 500 });
+	
+	//todo: implement those funcs.
+	var coloursAdd = function() {
+		$('body').append('<div id="controls-colours-add-dialog" style="display: none"></div>');
+		var box = $('#controls-colours-add-dialog');
 		
-		var tabs_str = ""+
-		"<div id='tabs'>\n"+
-		"	<ul>\n"+
-		"		<li><a href='#tabs-1'>Colours</a></li>\n"+
-		"		<li><a href='#tabs-2'>Users</a></li>\n"+
-		"		<li><a href='#tabs-3'>Months</a></li>\n"+
-		"		<li><a href='#tabs-4'>About</a></li>\n"+
-		"	</ul>\n"+
-		"	<div id='tabs-1'>\n"+
-		"		<p>Available colours:</p>\n"+
-		"		<ul id='controls-colours-list'>\n"+
-		"		</ul>\n"+
-		"		<button id='controls-colours-add'>Add a colour</button>\n"+
-		"	</div>\n"+
-		"	<div id='tabs-2'>\n"+
-		"		<p>This is not implemented yet</p>\n"+
-		"		<p>Feature Coming Soon</p>\n"+
-		"	</div>\n"+
-		"	<div id='tabs-3'>\n"+
-		"		<p>This is not implemented yet</p>\n"+
-		"		<p>Feature Coming Soon</p>\n"+
-		"	</div>\n"+
-		"	<div id='tabs-4'>\n"+
-		"		<p>ColourCal is a project by: passcod</p>\n"+
-		"		<p><a href='http://colourcal.sourceforge.net'>http://colourcal.sourceforge.net</a></p>\n"+
-		"	</div>\n"+
-		"<div id='controls-buttons'>\n"+
-		"	<button id='controls-save'>Save</button>\n"+
-		"	<button id='controls-cancel'>Cancel</button>\n"+
-		"</div>\n"+
-		"</div>";
-		//todo: implement users + months capabilities
+		box.append('<form></form>');
 		
-		
-		var ctrl = $('#controls');
-		ctrl.html(tabs_str);
-		
-		var tabs = ctrl.find('#tabs');
-		tabs.tabs();
-		
-		var colours_list = ctrl.find('#controls-colours-list');
-		
-		for( i in colors )
-		{
-			colours_list.append('<li class="ui-state-default">'+colors[i]+' - #'+color_codes[i]+' - <span style="background-color: #'+color_codes[i]+'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="float: right"><a class="controls-colours-edit">Edit</a> <a class="controls-colours-remove">Remove</a></span></li>'+"\n");
-		}
-		
-		colours_list.sortable();
-		colours_list.disableSelection();
-		
-		ctrl.find('#controls-colours-add').button().click(coloursAdd);
-		ctrl.find('.controls-colours-edit').click(coloursEdit);
-		ctrl.find('.controls-colours-remove').click(coloursRemove);
-		
-		ctrl.find('#controls-save').button().click(coloursSave);
-		ctrl.find('#controls-cancel').button().click(function() {
-			ctrl.dialog('close');
+		$('#controls-colours-add-dialog-pick').ColorPicker({
+			color: '#0000ff',
+			onShow: function (colpkr) {
+				$(colpkr).fadeIn(500);
+				return false;
+			},
+			onHide: function (colpkr) {
+				$(colpkr).fadeOut(500);
+				return false;
+			},
+			onChange: function (hsb, hex, rgb) {
+				$('#controls-colours-add-dialog-pick').css('backgroundColor', '#' + hex);
+			}
 		});
-		
-		ctrl.dialog({ modal: true, title: "Controls", width: 600, maxHeight: 500 });
-		
-		//todo: implement those funcs.
-		var coloursAdd = function() {
-			//
-		};
-		
-		var coloursEdit = function() {
-			//
-		};
-		
-		var coloursRemove = function() {
-			//
-		};
-		
-		var coloursSave = function() {
-			//
-		};
+
 	};
 	
+	var coloursEdit = function() {
+		//
+	};
 	
-	if ( $.data($('#colourcal-data-store').get(0), "controls-state") == 'loaded' )
-	{
-		showControlsPopup();
-	}
-	else
-	{
-		$.getScript(page_self+'?data=uijs', function() {
-			$.get(page_self+'?data=uicss', function(css) {
-				$('head').append('<style type="text/css">'+css+"\n\n"+
-				"#controls-colours-list { list-style-type: none; margin: 0; padding: 0; }\n"+
-				"#controls-colours-list li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 0.8em; height: 15px; }\n"+
-				"#controls-buttons { float: right; }\n"+
-				"#controls-buttons button * { font-size: 1em; height: 1.1em; margin: 0; padding: 0.2em; }\n"+
-				'</style>');
+	var coloursRemove = function() {
+		//
+	};
+	
+	var coloursSave = function() {
+		//
+	};
+}
+
+
+function loadLibs()
+{
+	$.getScript(page_self+'?data=uijs', function() {
+		$.get(page_self+'?data=uicss', function(css) {
+			$('head').append('<style type="text/css">'+css+'</style>');
 			
-				$.data($('#colourcal-data-store').get(0), "controls-state", 'loaded');
-				showControlsPopup();
+			$.getScript(page_self+'?data=colorpickerjs', function() {
+				return true;
 			});
 		});
-	}
+	});
 }
 
 <?php $good_script = ob_get_clean(); ?>
