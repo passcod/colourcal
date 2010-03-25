@@ -1,9 +1,0 @@
-====== CHANGE LOG ======
-
-=== 15/03/10 ===
-
- * Changed the month detecting function to work with up to 12 months.
- * Now all the required libs are loaded when logging in, not just before
- they are needed; this centralizes the action, and eases further dev.
- * Added the ColorPicker jQuery plugin.
- * Started work on the colour add dialog in the Controls.
